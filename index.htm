@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="lt-ie10 lt-ie9 lt-ie8 lt-ie7"><![endif]-->
+<!--[if IE 7]><html class="lt-ie10 lt-ie9 lt-ie8"><![endif]-->
+<!--[if IE 8]><html class="lt-ie10 lt-ie9"> <![endif]-->
+<!--[if IE 9]><html class="lt-ie10"> <![endif]-->
+<!--[if gt IE 9]><!--> <html> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <!--<title>{Title}{block:SearchPage} ({lang:Search results for SearchQuery}){/block:SearchPage}{block:PermalinkPage}{block:PostSummary} — {PostSummary}{/block:PostSummary}{/block:PermalinkPage}</title>
+        {block:Description}
+        <meta name="description" content="{MetaDescription}">
+        {/block:Description}
+        -->
+
+        <title>興圖世界</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="js/jquery.zoom.min.js"></script>
+        <style>
+            div#bg{
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                z-index: 5;
+
+                background: rgb(26, 54, 65) url("img/world_map.png");
+                background-attachment:fixed;
+                background-position:center; 
+
+                filter: blur(5px);
+                -webkit-filter: blur(5px);
+                -moz-filter: blur(5px);
+                -o-filter: blur(5px);
+                -ms-filter: blur(5px);
+            }
+            div#map_container{
+                z-index: 10;
+                position: fixed;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+
+                background: rgba(26, 54, 65, 0.75) url("img/main_bg.jpg") ;
+                background-position:center; 
+                background-size:contain;
+                background-repeat:no-repeat;
+            }
+
+            div#hover_sensor{
+                z-index: 30;
+                position: fixed;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+            }
+
+            div#info_container{
+                z-index: 20;
+                position: fixed;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+
+                transition:opacity 0.5s;
+            }
+
+            div.disablePointer{
+                pointer-events: none;
+            }
+
+            a.act_block{
+                position: absolute;
+                display:block;
+                background:rgba(255, 255, 255, 0.01);
+                border-radius: 5px;
+
+                transition:background 0.5s;
+            }
+            a.act_block:hover{
+                position: absolute;
+                display:block;
+                background:rgba(255, 255, 255, 0.28);
+                border-radius: 5px;
+
+            }
+        </style>
+    </head>
+    <!--<body data-urlencoded-name="{URLEncodedName}" class="{select:Layout}{block:IndexPage} index-page{/block:IndexPage}{block:PermalinkPage} permalink{/block:PermalinkPage}{block:SearchPage} search-page{block:NoSearchResults} no-results{/block:NoSearchResults}{/block:SearchPage}">-->
+    <body>
+        <div id="bg"></div>
+        <div id="map_container"></div>
+        <div id="hover_sensor"></div>
+        <div id="info_container" class="disablePointer">
+            <div id="info_box"></div>
+        </div>
+        <script>
+            var debug;
+            var main_bg_size={width:1992,height:883};
+            var base_position={left:0,top:0};
+            var zoomRatio=1;
+
+            var default_info_bg='img/title.png';
+            var acts=[
+                {
+                    title:'Jan',
+                    href:'http://tw.yahoo.com',
+                    top:80,
+                    height:190,
+                    left:260,
+                    width:135,
+
+                    img:'img/Jan.png'
+                },
+                {
+                    title:'Feb',
+                    href:'http://tw.yahoo.com',
+                    top:110,
+                    height:90,
+                    left:1330,
+                    width:110,
+
+                    img:'img/Feb.png'
+                },
+                {
+                    title:'January',
+                    href:'http://tw.yahoo.com',
+                    top:300,
+                    height:90,
+                    left:360,
+                    width:125,
+
+                    img:'img/March.png'
+                },
+            ];
+
+
+            $(document).ready(function(){
+                var container=$('div#hover_sensor');
+                var info_container=$('div#info_container');
+
+                function info_bg_css(url){
+                    info_container
+                        .css('background','url("'+url+'")')
+                        .css('background-size','contain')
+                        .css('background-position','center')
+                        .css('background-repeat','no-repeat');
+                }
+
+                info_bg_css(default_info_bg);
+
+                //console.log(acts);
+                debug=base_position;
+
+                var myInteval=false;
+                function change_info_bg(url){
+                    if(myInteval===false){
+                        info_container.css({opacity:0});
+                        myInteval=setInterval(function(){
+                            info_bg_css(url);
+                            info_container.css({opacity:1});
+                            clearInterval(myInteval);
+                            myInteval=false;
+                        },500);
+                    }
+                    else{
+                        info_container.css({opacity:1});
+                        clearInterval(myInteval);
+                        myInteval=false;
+                    }
+                }
+
+                function update_acts_hover(){
+                    container.empty();
+
+                    var container_size={
+                        width:container.width(),
+                        height:container.height()
+                    };
+
+                    container_size.ratio=container_size.width/container_size.height;
+                    main_bg_size.ratio=main_bg_size.width/main_bg_size.height;
+                    
+
+
+                    if(container_size.ratio > main_bg_size.ratio){
+                        base_position.left= (container_size.width - container_size.height*main_bg_size.ratio)/2;
+                        zoomRatio=container_size.height/main_bg_size.height;
+                    }
+                    else{
+                        base_position.top= (container_size.height - container_size.width/main_bg_size.ratio)/2;
+                        zoomRatio=container_size.width/main_bg_size.width;
+                    }
+
+                    acts.forEach(function(act){
+                        //console.log("apending!");
+                        //console.log(act);
+                        var toBeApd=$('<a class="act_block"></a>');
+                        toBeApd
+                            .attr('target','_blank')
+                            .attr('href',act.href)
+                            .css('top',base_position.top+act.top*zoomRatio)
+                            .css('height',act.height*zoomRatio)
+                            .css('left',base_position.left+act.left*zoomRatio)
+                            .css('width',act.width*zoomRatio)
+                            .mouseenter(function(){
+                                change_info_bg(act.img);
+                                //console.log('mouseenter');
+                            })
+                            .mouseleave(function(){
+                                change_info_bg(default_info_bg);
+                                //console.log('mouseleave');
+                            });
+                        container.append(toBeApd);
+                    });
+                }
+
+                update_acts_hover();
+
+                var resize_waiting=false;
+                $( window ).resize(function(){
+                    if(resize_waiting!==false)
+                        clearInterval(resize_waiting);
+                    resize_waiting=setInterval(function(){
+                        update_acts_hover();
+                        //console.log("!?");
+                        clearInterval(resize_waiting);
+                        resize_waiting=false;
+                    },1000);
+                    //console.log("!!");
+                });
+            });
+        </script>
+    </body>
+</html>
