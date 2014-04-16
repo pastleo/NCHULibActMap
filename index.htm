@@ -14,18 +14,19 @@
 
         <title>興圖世界</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <script src="js/jquery.js"></script>
         <script src="js/jquery.zoom.min.js"></script>
+        <script src="js/jquery.appear.js"></script>
         <style>
-            div#bg{
-                position: absolute;
+            .full_fixed_screen{
                 left: 0;
                 right: 0;
                 top: 0;
                 bottom: 0;
-                z-index: 5;
-
+                position: fixed;
+            }
+            div#bg{
                 background: rgb(26, 54, 65) url("img/world_map.png");
                 background-attachment:fixed;
                 background-position:center; 
@@ -37,13 +38,6 @@
                 -ms-filter: blur(5px);
             }
             div#map_container{
-                z-index: 10;
-                position: fixed;
-                left: 0;
-                right: 0;
-                top: 0;
-                bottom: 0;
-
                 background: rgba(26, 54, 65, 0.75) url("img/main_bg.jpg") ;
                 background-position:center; 
                 background-size:contain;
@@ -51,23 +45,21 @@
             }
 
             div#hover_sensor{
-                z-index: 30;
-                position: fixed;
-                left: 0;
-                right: 0;
-                top: 0;
-                bottom: 0;
-            }
-
-            div#info_container{
                 z-index: 20;
                 position: fixed;
                 left: 0;
-                right: 0;
+                /*right: 0;*/
                 top: 0;
-                bottom: 0;
+                /*bottom: 0;*/
+                height: 0px;
+                width: 0px;
+            }
+
+            div#info_container{
 
                 transition:opacity 0.5s;
+
+                overflow: scroll;
             }
 
             div.disablePointer{
@@ -89,145 +81,346 @@
                 border-radius: 5px;
 
             }
+
+            div#scroll_buffer{
+                height: 20px;
+
+                width: 100%;
+
+                background-image: url('img/stamp.png');
+                background-size: contain;
+                background-position: 50% 50%;
+                background-repeat: no-repeat no-repeat;
+            }
+
+            div#fixed_title{
+
+                position: fixed;
+                
+            }
+
+            div#fixed_title img{
+                height: 80%;
+                display: block;
+
+                position: relative;
+                top: 20%;
+                transition: all 1s;
+            }
+            div#fixed_title.small img{
+
+                height: 50%;
+                top:50%;
+            }
+
+            div.detail_panel{
+                z-index: 100;
+                position: relative;
+            }
+
+            div.detail_panel h3{
+                background: rgba(86, 171, 208, 1);
+                display: block;
+                /*text-shadow: 0 0 8px #FFFFFF;*/
+                padding: 5px;
+                font-weight: bolder;
+                color: white;
+            }
+
+            div.detail_panel_body{
+                border-left: 10px solid rgba(86, 171, 208, 1);
+                padding-left: 10px;
+                background: rgba(243, 243, 243, 0.33);
+            }
+
+            div.detail_panel_body_list{
+                padding-left: 5px;
+                -webkit-transition: background 0.5s;
+                -moz-transition: background 0.5s;
+                -ms-transition: background 0.5s;
+                -o-transition: background 0.5s;
+                transition: background 0.5s;
+            }
+
+            div.detail_panel_body_list h4{
+                color: #163753;
+            }
+
+            div.detail_panel_body_list p{
+                color: #163753;
+            }
+
+            div.detail_panel_body_list.emphasis h4{
+                color: rgb(29, 115, 150);
+                text-shadow: 0 0 8px #FFFFFF;
+                font-weight: bolder;
+            }
+
+            div.detail_panel_body_list.emphasis p{
+                color: rgb(29, 115, 150);
+                font-weight: bolder;
+            }
+
+            div.detail_panel_body_list:hover{
+                background: rgba(255, 255, 255, 0.67);
+            }
         </style>
     </head>
     <!--<body data-urlencoded-name="{URLEncodedName}" class="{select:Layout}{block:IndexPage} index-page{/block:IndexPage}{block:PermalinkPage} permalink{/block:PermalinkPage}{block:SearchPage} search-page{block:NoSearchResults} no-results{/block:NoSearchResults}{/block:SearchPage}">-->
     <body>
-        <div id="bg"></div>
-        <div id="map_container"></div>
-        <div id="hover_sensor"></div>
-        <div id="info_container" class="disablePointer">
-            <div id="info_box"></div>
+        <div id="bg" class="full_fixed_screen"></div>
+        <div id="map_container" class="full_fixed_screen"></div>
+        <div id="info_container" class="full_fixed_screen">
+            <div id="info_view">
+                <div id="hover_sensor" class="same_as_viewport_height"></div>
+                <div id="fixed_title" class="same_as_viewport_height disablePointer full_fixed_screen">
+                    <img class="same_as_map_width" src="img/title.png" alt="">
+                </div>
+                <div id="scroll_buffer" class="same_as_viewport_height"></div>
+                <div id="info_content" class="same_as_map_width">
+                    <h1>HIIIIIII</h1>
+                    <h1>HIIIIIII</h1>
+                    <h1>HIIIIIII</h1>
+                    <h1>HIIIIIII</h1>
+                    <h1>HIIIIIII</h1>
+                    <h1>HIIIIIII</h1>
+                    <h1>HIIIIIII</h1>
+                    <h1>HIIIIIII</h1>
+                    <h1>HIIIIIII</h1>
+                    <h1>HIIIIIII</h1>
+                    <h1>HIIIIIII</h1>
+                    <h1>HIIIIIII</h1>
+                    <h1>HIIIIIII</h1>
+                    <h1>HIIIIIII</h1>
+                    <h1>HIIIIIII</h1>
+                    <h1>HIIIIIII</h1>
+                    <h1>HIIIIIII</h1>
+                    <h1>HIIIIIII</h1>
+                    <h1>HIIIIIII</h1>
+                    <h1>HIIIIIII</h1>
+                </div>
+            </div>
         </div>
+
         <script>
             var debug;
             var main_bg_size={width:1992,height:883};
             var base_position={left:0,top:0};
             var zoomRatio=1;
+            var viewport_size={
+                width:0,
+                height:0
+            };
+            var inited=false;
 
             var default_info_bg='img/title.png';
             var acts=[
                 {
-                    title:'Jan',
                     href:'http://tw.yahoo.com',
                     top:80,
                     height:190,
                     left:260,
                     width:135,
 
-                    img:'img/Jan.png'
+                    title:'閱讀愛麗絲',
+                    detail_margin_top:50,
+                    detail_col_offset:3,
+                    detail_list:[
+                        {
+                            title:'諾貝爾文學獎得主',
+                            description:'孟洛著作書展',
+                            url:'http://tw.yahoo.com',
+                            main:true
+                        },
+                        {
+                            title:'title-2',
+                            description:'description-2',
+                            url:'http://google.com'
+                        }
+                    ]
                 },
                 {
-                    title:'Feb',
                     href:'http://tw.yahoo.com',
                     top:110,
                     height:90,
                     left:1330,
                     width:110,
 
-                    img:'img/Feb.png'
+                    title:'Feb',
+                    detail_margin_top:50,
+                    detail_col_offset:2,
+                    detail_list:[
+                        {
+                            title:'title-1',
+                            description:'description-1',
+                            url:'http://tw.yahoo.com',
+                            
+                        },
+                        {
+                            title:'title-2',
+                            description:'description-2',
+                            url:'http://google.com'
+                        }
+                    ]
                 },
                 {
-                    title:'January',
                     href:'http://tw.yahoo.com',
                     top:300,
                     height:90,
                     left:360,
                     width:125,
 
-                    img:'img/March.png'
+                    title:'January',
+                    detail_col_offset:0,
+                    detail_list:[
+                        {
+                            title:'title-1',
+                            description:'description-1',
+                            url:'http://tw.yahoo.com'
+                        },
+                        {
+                            title:'title-2',
+                            description:'description-2',
+                            url:'http://google.com'
+                        }
+                    ]
                 },
             ];
 
 
             $(document).ready(function(){
-                var container=$('div#hover_sensor');
+                var hover_sensor=$('div#hover_sensor');
                 var info_container=$('div#info_container');
+                var map_container=$('div#map_container');
+                var info_content=$('div#info_content');
 
-                function info_bg_css(url){
-                    info_container
-                        .css('background','url("'+url+'")')
-                        .css('background-size','contain')
-                        .css('background-position','center')
-                        .css('background-repeat','no-repeat');
-                }
-
-                info_bg_css(default_info_bg);
-
-                //console.log(acts);
-                debug=base_position;
-
-                var myInteval=false;
-                function change_info_bg(url){
-                    if(myInteval===false){
-                        info_container.css({opacity:0});
-                        myInteval=setInterval(function(){
-                            info_bg_css(url);
-                            info_container.css({opacity:1});
-                            clearInterval(myInteval);
-                            myInteval=false;
-                        },500);
-                    }
-                    else{
-                        info_container.css({opacity:1});
-                        clearInterval(myInteval);
-                        myInteval=false;
-                    }
-                }
-
-                function update_acts_hover(){
-                    container.empty();
-
-                    var container_size={
-                        width:container.width(),
-                        height:container.height()
+                function update_view(){
+                    viewport_size={
+                        width:info_container.width(),
+                        height:info_container.height()
                     };
 
-                    container_size.ratio=container_size.width/container_size.height;
+                    viewport_size.ratio=viewport_size.width/viewport_size.height;
                     main_bg_size.ratio=main_bg_size.width/main_bg_size.height;
-                    
 
-
-                    if(container_size.ratio > main_bg_size.ratio){
-                        base_position.left= (container_size.width - container_size.height*main_bg_size.ratio)/2;
-                        zoomRatio=container_size.height/main_bg_size.height;
+                    if(viewport_size.ratio > main_bg_size.ratio){
+                        base_position.left= (viewport_size.width - viewport_size.height*main_bg_size.ratio)/2;
+                        zoomRatio=viewport_size.height/main_bg_size.height;
                     }
                     else{
-                        base_position.top= (container_size.height - container_size.width/main_bg_size.ratio)/2;
-                        zoomRatio=container_size.width/main_bg_size.width;
+                        base_position.top= (viewport_size.height - viewport_size.width/main_bg_size.ratio)/2;
+                        zoomRatio=viewport_size.width/main_bg_size.width;
                     }
 
-                    acts.forEach(function(act){
-                        //console.log("apending!");
-                        //console.log(act);
-                        var toBeApd=$('<a class="act_block"></a>');
-                        toBeApd
-                            .attr('target','_blank')
-                            .attr('href',act.href)
-                            .css('top',base_position.top+act.top*zoomRatio)
-                            .css('height',act.height*zoomRatio)
-                            .css('left',base_position.left+act.left*zoomRatio)
-                            .css('width',act.width*zoomRatio)
-                            .mouseenter(function(){
-                                change_info_bg(act.img);
-                                //console.log('mouseenter');
-                            })
-                            .mouseleave(function(){
-                                change_info_bg(default_info_bg);
-                                //console.log('mouseleave');
+                    // console.log("zoomRatio="+zoomRatio);
+                    // console.log("viewport_size:");
+                    // console.log(viewport_size);
+                    // console.log("main_bg_size:");
+                    // console.log(main_bg_size);
+
+                    if(!inited){
+                        hover_sensor.empty();
+                        info_content.empty();
+
+                        acts.forEach(function(act,key){
+                            //console.log("key:");
+                            //console.log(key);
+                            //console.log("apending!");
+                            //console.log(act);
+                            var toBeApd=$('<a class="act_block" id="button-'+key+'"></a>');
+                            toBeApd
+                                .attr('target','_blank')
+                                .attr('href',act.href)
+                                .css('top',base_position.top+act.top*zoomRatio)
+                                .css('height',act.height*zoomRatio)
+                                .css('left',base_position.left+act.left*zoomRatio)
+                                .css('width',act.width*zoomRatio);
+                            hover_sensor.append(toBeApd);
+
+                            var detail_col_offset_md;
+                            if(act.detail_col_offset>=2)
+                                detail_col_offset_md=6;
+                            else
+                                detail_col_offset_md=0;
+
+                            var detail_margin_top;
+                            if(typeof act.detail_margin_top === "undefined")
+                                detail_margin_top=0;
+                            else
+                                detail_margin_top=act.detail_margin_top;
+
+                            var detail=$('<div id="detail-'+key+'" class="detail_panel col-sm-12 col-xs-12 col-md-6 col-md-offset-'+detail_col_offset_md+' col-lg-3 col-lg-offset-'+act.detail_col_offset*3+'"></div>').css('margin-top',detail_margin_top+"px").appear();
+                            detail.append($('<h3>'+act.title+'</h3>'));
+                            
+                            var detail_content=$('<div class="detail_panel_body"></div>');
+                            act.detail_list.forEach(function(element,key){
+                                var url;
+                                if(typeof element.url === "undefined")
+                                    url="#"
+                                else 
+                                    url=element.url;
+                                var element_wrapper=$('<a href="'+url+'"></a>');
+                                var element_container=$('<div class="detail_panel_body_list"></div>');
+                                var element_title=$('<h4>'+element.title+'</h4>');
+                                if((typeof element.main ==="boolean")&&(element.main))
+                                    element_container.addClass('emphasis');
+                                element_container.append(element_title);
+
+                                if(typeof element.description ==="string")
+                                    element_container.append($('<p>'+element.description+'</p>'));
+
+                                detail_content.append(element_wrapper.append(element_container));
                             });
-                        container.append(toBeApd);
-                    });
+                            detail.append(detail_content);
+                            info_content.append($('<div class="act_detail same_as_viewport_height"></div>').append(detail));
+                        });
+
+
+                    }
+                    else{
+                        acts.forEach(function(act,key){
+                            //console.log("key:");
+                            //console.log(key);
+                            //console.log("apending!");
+                            //console.log(act);
+                            $('a.act_block#'+key)
+                                .css('top',base_position.top+act.top*zoomRatio)
+                                .css('height',act.height*zoomRatio)
+                                .css('left',base_position.left+act.left*zoomRatio)
+                                .css('width',act.width*zoomRatio);
+                        });
+                    }
+
+
+                    hover_sensor.css('height',(viewport_size.height)+"px");
+                    $('.same_as_viewport_height').css('height',(viewport_size.height)+"px");
+                    //$('div#fixed_title img').css('left',base_position.left+"px");
+                    $('.same_as_map_width').css('left',base_position.left+"px").css('right',base_position.left+"px");
+
+                    inited=true;
                 }
 
-                update_acts_hover();
+                function enter_an_act(e,object){
+                    console.log(e);
+                    console.log(object);
+                }
+
+
+
+                update_view();
+
+                console.log($('div.detail_panel_body_list'));
+                //$('.listened_by_appear').appear();
+                $(document.body).on('disappear', 'div#detail-0', function(e, $affected) {
+                    console.log("...");
+                  });
 
                 var resize_waiting=false;
                 $( window ).resize(function(){
                     if(resize_waiting!==false)
                         clearInterval(resize_waiting);
                     resize_waiting=setInterval(function(){
-                        update_acts_hover();
+                        update_view();
                         //console.log("!?");
                         clearInterval(resize_waiting);
                         resize_waiting=false;
