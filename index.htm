@@ -16,8 +16,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <link rel="stylesheet" href="css/bootstrap.css">
         <script src="js/jquery.js"></script>
-        <script src="js/jquery.zoom.min.js"></script>
-        <script src="js/jquery.appear.js"></script>
+        <script src="js/jquery.scrollTo.min.js"></script>
         <style>
             .full_fixed_screen{
                 left: 0;
@@ -72,14 +71,20 @@
                 background:rgba(255, 255, 255, 0.01);
                 border-radius: 5px;
 
-                transition:background 0.5s;
+                transition:all 0.5s;
             }
             a.act_block:hover{
                 position: absolute;
                 display:block;
                 background:rgba(255, 255, 255, 0.28);
                 border-radius: 5px;
+            }
 
+            a.act_block.focus{
+                background:rgba(255, 255, 255, 0.28);
+                border-radius: 5px;
+                
+                border: 5px solid  rgb(29, 115, 150);
             }
 
             div#scroll_buffer{
@@ -349,7 +354,7 @@
                             else
                                 detail_margin_top=act.detail_margin_top;
 
-                            var detail=$('<div id="detail-'+key+'" class="detail_panel col-sm-12 col-xs-12 col-md-6 col-md-offset-'+detail_col_offset_md+' col-lg-3 col-lg-offset-'+act.detail_col_offset*3+'"></div>').css('margin-top',detail_margin_top+"px").appear();
+                            var detail=$('<div id="detail-'+key+'" class="detail_panel col-sm-12 col-xs-12 col-md-6 col-md-offset-'+detail_col_offset_md+' col-lg-3 col-lg-offset-'+act.detail_col_offset*3+'"></div>').css('margin-top',detail_margin_top+"px");
                             detail.append($('<h3>'+act.title+'</h3>'));
                             
                             var detail_content=$('<div class="detail_panel_body"></div>');
@@ -409,11 +414,39 @@
 
                 update_view();
 
-                console.log($('div.detail_panel_body_list'));
-                //$('.listened_by_appear').appear();
-                $(document.body).on('disappear', 'div#detail-0', function(e, $affected) {
-                    console.log("...");
-                  });
+                var change_viewing_waiting=false;
+                info_container.scroll(function(){
+                    if(change_viewing_waiting!==false)
+                        clearInterval(change_viewing_waiting);
+                    change_viewing_waiting=setInterval(function(){
+                        var pos=Math.floor((info_container.scrollTop()/viewport_size.height)-0.5);
+                        //console.log("pos="+pos);
+
+                        $('a.focus').removeClass('focus');
+                        if(pos>=0){
+                            $('div#fixed_title').addClass('small');
+                            $('a#button-'+(pos)).addClass('focus');
+                            //console.log($('a#button-'+(pos)));
+                        }
+                        else{
+                            $('div#fixed_title.small').removeClass('small');
+                        }
+
+                        clearInterval(change_viewing_waiting);
+                        change_viewing_waiting=false;
+                    },200);
+                });
+
+                $('a.act_block').click(function(event){
+                    console.log(this);
+                    var pos=parseInt($(this).attr('id').split('-')[1]);
+                    console.log("pos="+pos);
+                    info_container.scrollTo(
+                        viewport_size.height*(pos+1),1000);
+
+                    event.preventDefault();
+                    return false;
+                });
 
                 var resize_waiting=false;
                 $( window ).resize(function(){
