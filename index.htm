@@ -15,167 +15,16 @@
         <title>興圖世界</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/NCHULibActMap.css">
         <script src="js/jquery.js"></script>
         <script src="js/jquery.scrollTo.min.js"></script>
-        <style>
-            .full_fixed_screen{
-                left: 0;
-                right: 0;
-                top: 0;
-                bottom: 0;
-                position: fixed;
-            }
-            div#bg{
-                background: rgb(26, 54, 65) url("img/world_map.png");
-                background-attachment:fixed;
-                background-position:center; 
-
-                filter: blur(5px);
-                -webkit-filter: blur(5px);
-                -moz-filter: blur(5px);
-                -o-filter: blur(5px);
-                -ms-filter: blur(5px);
-            }
-            div#map_container{
-                background: rgba(26, 54, 65, 0.75) url("img/main_bg.jpg") ;
-                background-position:center; 
-                background-size:contain;
-                background-repeat:no-repeat;
-            }
-
-            div#hover_sensor{
-                z-index: 20;
-                position: fixed;
-                left: 0;
-                /*right: 0;*/
-                top: 0;
-                /*bottom: 0;*/
-                height: 0px;
-                width: 0px;
-            }
-
-            div#info_container{
-
-                transition:opacity 0.5s;
-
-                overflow: scroll;
-            }
-
-            div.disablePointer{
-                pointer-events: none;
-            }
-
-            a.act_block{
-                position: absolute;
-                display:block;
-                background:rgba(255, 255, 255, 0.01);
-                border-radius: 5px;
-
-                transition:all 0.5s;
-            }
-            a.act_block:hover{
-                position: absolute;
-                display:block;
-                background:rgba(255, 255, 255, 0.28);
-                border-radius: 5px;
-            }
-
-            a.act_block.focus{
-                background:rgba(255, 255, 255, 0.28);
-                border-radius: 5px;
-                
-                border: 5px solid  rgb(29, 115, 150);
-            }
-
-            div#scroll_buffer{
-                height: 20px;
-
-                width: 100%;
-
-                background-image: url('img/stamp.png');
-                background-size: contain;
-                background-position: 50% 50%;
-                background-repeat: no-repeat no-repeat;
-            }
-
-            div#fixed_title{
-
-                position: fixed;
-                
-            }
-
-            div#fixed_title img{
-                height: 80%;
-                display: block;
-
-                position: relative;
-                top: 20%;
-                transition: all 1s;
-            }
-            div#fixed_title.small img{
-
-                height: 50%;
-                top:50%;
-            }
-
-            div.detail_panel{
-                z-index: 100;
-                position: relative;
-            }
-
-            div.detail_panel h3{
-                background: rgba(86, 171, 208, 1);
-                display: block;
-                /*text-shadow: 0 0 8px #FFFFFF;*/
-                padding: 5px;
-                font-weight: bolder;
-                color: white;
-            }
-
-            div.detail_panel_body{
-                border-left: 10px solid rgba(86, 171, 208, 1);
-                padding-left: 10px;
-                background: rgba(243, 243, 243, 0.33);
-            }
-
-            div.detail_panel_body_list{
-                padding-left: 5px;
-                -webkit-transition: background 0.5s;
-                -moz-transition: background 0.5s;
-                -ms-transition: background 0.5s;
-                -o-transition: background 0.5s;
-                transition: background 0.5s;
-            }
-
-            div.detail_panel_body_list h4{
-                color: #163753;
-            }
-
-            div.detail_panel_body_list p{
-                color: #163753;
-            }
-
-            div.detail_panel_body_list.emphasis h4{
-                color: rgb(29, 115, 150);
-                text-shadow: 0 0 8px #FFFFFF;
-                font-weight: bolder;
-            }
-
-            div.detail_panel_body_list.emphasis p{
-                color: rgb(29, 115, 150);
-                font-weight: bolder;
-            }
-
-            div.detail_panel_body_list:hover{
-                background: rgba(255, 255, 255, 0.67);
-            }
-        </style>
+        <script src="js/NCHULibActMap.js"></script>
     </head>
     <!--<body data-urlencoded-name="{URLEncodedName}" class="{select:Layout}{block:IndexPage} index-page{/block:IndexPage}{block:PermalinkPage} permalink{/block:PermalinkPage}{block:SearchPage} search-page{block:NoSearchResults} no-results{/block:NoSearchResults}{/block:SearchPage}">-->
     <body>
-        <div id="bg" class="full_fixed_screen"></div>
-        <div id="map_container" class="full_fixed_screen"></div>
-        <div id="info_container" class="full_fixed_screen">
+        <div id="bg" class="full_fixed_screen" style="display:none;"></div>
+        <div id="map_container" class="full_fixed_screen" style="display:none;"></div>
+        <div id="info_container" class="full_fixed_screen" style="display:none;">
             <div id="info_view">
                 <div id="hover_sensor" class="same_as_viewport_height"></div>
                 <div id="fixed_title" class="same_as_viewport_height disablePointer full_fixed_screen">
@@ -183,283 +32,48 @@
                 </div>
                 <div id="scroll_buffer" class="same_as_viewport_height"></div>
                 <div id="info_content" class="same_as_map_width">
-                    <h1>HIIIIIII</h1>
-                    <h1>HIIIIIII</h1>
-                    <h1>HIIIIIII</h1>
-                    <h1>HIIIIIII</h1>
-                    <h1>HIIIIIII</h1>
-                    <h1>HIIIIIII</h1>
-                    <h1>HIIIIIII</h1>
-                    <h1>HIIIIIII</h1>
-                    <h1>HIIIIIII</h1>
-                    <h1>HIIIIIII</h1>
-                    <h1>HIIIIIII</h1>
-                    <h1>HIIIIIII</h1>
-                    <h1>HIIIIIII</h1>
-                    <h1>HIIIIIII</h1>
-                    <h1>HIIIIIII</h1>
-                    <h1>HIIIIIII</h1>
-                    <h1>HIIIIIII</h1>
-                    <h1>HIIIIIII</h1>
-                    <h1>HIIIIIII</h1>
-                    <h1>HIIIIIII</h1>
                 </div>
             </div>
         </div>
-
+        <div id="loadingWrapper">
+            <div id="noTrespassingOuterBarG">
+            <div id="noTrespassingFrontBarG" class="noTrespassingAnimationG">
+            <div class="noTrespassingBarLineG">
+            </div>
+            <div class="noTrespassingBarLineG">
+            </div>
+            <div class="noTrespassingBarLineG">
+            </div>
+            <div class="noTrespassingBarLineG">
+            </div>
+            <div class="noTrespassingBarLineG">
+            </div>
+            <div class="noTrespassingBarLineG">
+            </div>
+            </div>
+            </div>
+        </div>
         <script>
-            var debug;
-            var main_bg_size={width:1992,height:883};
-            var base_position={left:0,top:0};
-            var zoomRatio=1;
-            var viewport_size={
-                width:0,
-                height:0
-            };
-            var inited=false;
+            var acts_url="ActData.json";
+            var NCHULibActMap_obj;
 
-            var default_info_bg='img/title.png';
-            var acts=[
-                {
-                    href:'http://tw.yahoo.com',
-                    top:80,
-                    height:190,
-                    left:260,
-                    width:135,
-
-                    title:'閱讀愛麗絲',
-                    detail_margin_top:50,
-                    detail_col_offset:3,
-                    detail_list:[
-                        {
-                            title:'諾貝爾文學獎得主',
-                            description:'孟洛著作書展',
-                            url:'http://tw.yahoo.com',
-                            main:true
-                        },
-                        {
-                            title:'title-2',
-                            description:'description-2',
-                            url:'http://google.com'
-                        }
-                    ]
-                },
-                {
-                    href:'http://tw.yahoo.com',
-                    top:110,
-                    height:90,
-                    left:1330,
-                    width:110,
-
-                    title:'Feb',
-                    detail_margin_top:50,
-                    detail_col_offset:2,
-                    detail_list:[
-                        {
-                            title:'title-1',
-                            description:'description-1',
-                            url:'http://tw.yahoo.com',
-                            
-                        },
-                        {
-                            title:'title-2',
-                            description:'description-2',
-                            url:'http://google.com'
-                        }
-                    ]
-                },
-                {
-                    href:'http://tw.yahoo.com',
-                    top:300,
-                    height:90,
-                    left:360,
-                    width:125,
-
-                    title:'January',
-                    detail_col_offset:0,
-                    detail_list:[
-                        {
-                            title:'title-1',
-                            description:'description-1',
-                            url:'http://tw.yahoo.com'
-                        },
-                        {
-                            title:'title-2',
-                            description:'description-2',
-                            url:'http://google.com'
-                        }
-                    ]
-                },
-            ];
-
+            function ActsReceived(actsData){
+                //console.log(actsData);
+                NCHULibActMap_obj=new NCHULibActMap(actsData,function(){
+                    $('div#bg').fadeIn(function(){
+                        $('div#map_container').fadeIn(function(){
+                            $('div#info_container').fadeIn(function(){
+                                $('div#loadingWrapper').fadeOut(function(){
+                                    NCHULibActMap_obj.toDetail((new Date()).getMonth()+1);
+                                });
+                            })
+                        });
+                    });
+                });
+            }
 
             $(document).ready(function(){
-                var hover_sensor=$('div#hover_sensor');
-                var info_container=$('div#info_container');
-                var map_container=$('div#map_container');
-                var info_content=$('div#info_content');
-
-                function update_view(){
-                    viewport_size={
-                        width:info_container.width(),
-                        height:info_container.height()
-                    };
-
-                    viewport_size.ratio=viewport_size.width/viewport_size.height;
-                    main_bg_size.ratio=main_bg_size.width/main_bg_size.height;
-
-                    if(viewport_size.ratio > main_bg_size.ratio){
-                        base_position.left= (viewport_size.width - viewport_size.height*main_bg_size.ratio)/2;
-                        zoomRatio=viewport_size.height/main_bg_size.height;
-                    }
-                    else{
-                        base_position.top= (viewport_size.height - viewport_size.width/main_bg_size.ratio)/2;
-                        zoomRatio=viewport_size.width/main_bg_size.width;
-                    }
-
-                    // console.log("zoomRatio="+zoomRatio);
-                    // console.log("viewport_size:");
-                    // console.log(viewport_size);
-                    // console.log("main_bg_size:");
-                    // console.log(main_bg_size);
-
-                    if(!inited){
-                        hover_sensor.empty();
-                        info_content.empty();
-
-                        acts.forEach(function(act,key){
-                            //console.log("key:");
-                            //console.log(key);
-                            //console.log("apending!");
-                            //console.log(act);
-                            var toBeApd=$('<a class="act_block" id="button-'+key+'"></a>');
-                            toBeApd
-                                .attr('target','_blank')
-                                .attr('href',act.href)
-                                .css('top',base_position.top+act.top*zoomRatio)
-                                .css('height',act.height*zoomRatio)
-                                .css('left',base_position.left+act.left*zoomRatio)
-                                .css('width',act.width*zoomRatio);
-                            hover_sensor.append(toBeApd);
-
-                            var detail_col_offset_md;
-                            if(act.detail_col_offset>=2)
-                                detail_col_offset_md=6;
-                            else
-                                detail_col_offset_md=0;
-
-                            var detail_margin_top;
-                            if(typeof act.detail_margin_top === "undefined")
-                                detail_margin_top=0;
-                            else
-                                detail_margin_top=act.detail_margin_top;
-
-                            var detail=$('<div id="detail-'+key+'" class="detail_panel col-sm-12 col-xs-12 col-md-6 col-md-offset-'+detail_col_offset_md+' col-lg-3 col-lg-offset-'+act.detail_col_offset*3+'"></div>').css('margin-top',detail_margin_top+"px");
-                            detail.append($('<h3>'+act.title+'</h3>'));
-                            
-                            var detail_content=$('<div class="detail_panel_body"></div>');
-                            act.detail_list.forEach(function(element,key){
-                                var url;
-                                if(typeof element.url === "undefined")
-                                    url="#"
-                                else 
-                                    url=element.url;
-                                var element_wrapper=$('<a href="'+url+'"></a>');
-                                var element_container=$('<div class="detail_panel_body_list"></div>');
-                                var element_title=$('<h4>'+element.title+'</h4>');
-                                if((typeof element.main ==="boolean")&&(element.main))
-                                    element_container.addClass('emphasis');
-                                element_container.append(element_title);
-
-                                if(typeof element.description ==="string")
-                                    element_container.append($('<p>'+element.description+'</p>'));
-
-                                detail_content.append(element_wrapper.append(element_container));
-                            });
-                            detail.append(detail_content);
-                            info_content.append($('<div class="act_detail same_as_viewport_height"></div>').append(detail));
-                        });
-
-
-                    }
-                    else{
-                        acts.forEach(function(act,key){
-                            //console.log("key:");
-                            //console.log(key);
-                            //console.log("apending!");
-                            //console.log(act);
-                            $('a.act_block#'+key)
-                                .css('top',base_position.top+act.top*zoomRatio)
-                                .css('height',act.height*zoomRatio)
-                                .css('left',base_position.left+act.left*zoomRatio)
-                                .css('width',act.width*zoomRatio);
-                        });
-                    }
-
-
-                    hover_sensor.css('height',(viewport_size.height)+"px");
-                    $('.same_as_viewport_height').css('height',(viewport_size.height)+"px");
-                    //$('div#fixed_title img').css('left',base_position.left+"px");
-                    $('.same_as_map_width').css('left',base_position.left+"px").css('right',base_position.left+"px");
-
-                    inited=true;
-                }
-
-                function enter_an_act(e,object){
-                    console.log(e);
-                    console.log(object);
-                }
-
-
-
-                update_view();
-
-                var change_viewing_waiting=false;
-                info_container.scroll(function(){
-                    if(change_viewing_waiting!==false)
-                        clearInterval(change_viewing_waiting);
-                    change_viewing_waiting=setInterval(function(){
-                        var pos=Math.floor((info_container.scrollTop()/viewport_size.height)-0.5);
-                        //console.log("pos="+pos);
-
-                        $('a.focus').removeClass('focus');
-                        if(pos>=0){
-                            $('div#fixed_title').addClass('small');
-                            $('a#button-'+(pos)).addClass('focus');
-                            //console.log($('a#button-'+(pos)));
-                        }
-                        else{
-                            $('div#fixed_title.small').removeClass('small');
-                        }
-
-                        clearInterval(change_viewing_waiting);
-                        change_viewing_waiting=false;
-                    },200);
-                });
-
-                $('a.act_block').click(function(event){
-                    console.log(this);
-                    var pos=parseInt($(this).attr('id').split('-')[1]);
-                    console.log("pos="+pos);
-                    info_container.scrollTo(
-                        viewport_size.height*(pos+1),1000);
-
-                    event.preventDefault();
-                    return false;
-                });
-
-                var resize_waiting=false;
-                $( window ).resize(function(){
-                    if(resize_waiting!==false)
-                        clearInterval(resize_waiting);
-                    resize_waiting=setInterval(function(){
-                        update_view();
-                        //console.log("!?");
-                        clearInterval(resize_waiting);
-                        resize_waiting=false;
-                    },1000);
-                    //console.log("!!");
-                });
+                $.getJSON(acts_url,ActsReceived);
             });
         </script>
     </body>

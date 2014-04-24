@@ -1,0 +1,277 @@
+[
+    {
+
+        "href":"http://www.lib.nchu.edu.tw/",
+        "top":177,
+        "height":87,
+        "left":291,
+        "width":101,
+
+        "title":"閱讀愛麗絲",
+        "detail_col_offset":2,
+        "detail_list":[
+            {
+                "title":"諾貝爾文學獎得主",
+                "description":"孟洛著作書展",
+                "url":"http://tw.yahoo.com",
+                "main":true
+            }
+        ]
+    },
+    {
+
+        "href":"http://www.lib.nchu.edu.tw/",
+        "top":110,
+        "height":90,
+        "left":1330,
+        "width":110,
+
+        "title":"東奧日誌",
+        "detail_col_offset":0,
+        "detail_list":[
+            {
+                "title":"中時開卷好書獎展 (2-3月)",
+                "description":false,
+                "url":"http://www.lib.nchu.edu.tw/",
+                "main":true
+            }
+        ]
+    },
+    {
+
+        "href":"http://tw.yahoo.com",
+        "top":298,
+        "height":88,
+        "left":374,
+        "width":110,
+
+        "title":"情定奧斯卡",
+        "detail_col_offset":2,
+        "detail_list":[
+            {
+                "title":"資源指引課程 (3-6月)",
+                "description":false,
+                "url":"http://tw.yahoo.com",
+                "main":true
+            },
+            {
+                "title":"國家文官學院好書獎 (3-6月)",
+                "description":false,
+                "url":"http://google.com"
+            },
+            {
+                "title":"國際期刊投稿技巧講座 (3-5月)",
+                "description":false,
+                "url":"http://google.com"
+            }
+        ]
+    },
+    {
+
+        "href":"http://tw.yahoo.com",
+        "top":370,
+        "height":88,
+        "left":1145,
+        "width":110,
+
+        "title":"阿拉伯聞香",
+        "detail_col_offset":1,
+        "detail_list":[
+            {
+                "title":"423世界閱讀日系列活動",
+                "description":false,
+                "url":"http://tw.yahoo.com",
+                "main":true
+            },
+            {
+                "title":"借閱通知APP載到手",
+                "description":false,
+                "url":"http://google.com"
+            }
+        ]
+    },
+    {
+
+        "href":"http://tw.yahoo.com",
+        "top":640,
+        "height":90,
+        "left":1063,
+        "width":110,
+
+        "title":"好望角回憶錄",
+        "detail_col_offset":0,
+        "detail_list":[
+            {
+                "title":"主題影展",
+                "description":false,
+                "url":"http://tw.yahoo.com",
+                "main":true
+            },
+            {
+                "title":"春季i學講堂",
+                "description":false,
+                "url":"http://google.com"
+            },
+            {
+                "title":"留學講座(5-6月)",
+                "description":false,
+                "url":"http://google.com"
+            },
+            {
+                "title":"人文圖書申請說明會",
+                "description":false,
+                "url":"http://google.com"
+            }
+        ]
+    },
+    {
+
+        "href":"http://tw.yahoo.com",
+        "top":664,
+        "height":90,
+        "left":567,
+        "width":110,
+
+        "title":"航向世界盃",
+        "detail_col_offset":3,
+        "detail_list":[
+            {
+                "title":"畢業季系列活動",
+                "description":false,
+                "url":"http://tw.yahoo.com",
+                "main":true
+            },
+            {
+                "title":"論文上傳課程(6-7月)",
+                "description":false,
+                "url":"http://google.com"
+            }
+        ]
+    },
+    {
+
+        "href":"http://tw.yahoo.com",
+        "top":627,
+        "height":90,
+        "left":1596,
+        "width":110,
+
+        "title":"歌舞澳洲",
+        "detail_col_offset":1,
+        "detail_list":[]
+    },
+    {
+
+        "href":"http://tw.yahoo.com",
+        "top":489,
+        "height":90,
+        "left":1502,
+        "width":110,
+
+        "title":"雨林探險",
+        "detail_col_offset":0,
+        "detail_list":[]
+    },
+    {
+
+        "href":"http://tw.yahoo.com",
+        "top":461,
+        "height":90,
+        "left":1308,
+        "width":110,
+
+        "title":"探索興大陸",
+        "detail_col_offset":0,
+        "detail_list":[
+            {
+                "title":"迎新系列活動",
+                "description":false,
+                "url":"http://google.com",
+                "main":true
+            },
+            {
+                "title":"迎新導覽、書展",
+                "description":false,
+                "url":"http://google.com"
+            },
+            {
+                "title":"資源指引課程(8-11月)",
+                "description":false,
+                "url":"http://google.com"
+            }
+        ]
+    },
+    {
+
+        "href":"http://tw.yahoo.com",
+        "top":313,
+        "height":87,
+        "left":1386,
+        "width":138,
+
+        "title":"綿延中式智慧",
+        "detail_col_offset":1,
+        "detail_list":[
+            {
+                "title":"校慶圖書館活動 (10-11月)",
+                "description":false,
+                "url":"http://google.com",
+                "main":true
+            }
+        ]
+    },
+    {
+
+        "href":"http://tw.yahoo.com",
+        "top":256,
+        "height":85,
+        "left":997,
+        "width":123,
+
+        "title":"歐洲魅影",
+        "detail_col_offset":0,
+        "detail_list":[
+            {
+                "title":"歐洲電影展",
+                "description":false,
+                "url":"http://google.com",
+                "main":true
+            },
+            {
+                "title":"冬季i學講堂",
+                "description":false,
+                "url":"http://google.com"
+            }
+        ]
+    },
+    {
+
+        "href":"http://tw.yahoo.com",
+        "top":368,
+        "height":84,
+        "left":1561,
+        "width":142,
+
+        "title":"再現福爾摩沙",
+        "detail_col_offset":1,
+        "detail_list":[
+            {
+                "title":"圖書館週系列活動",
+                "description":false,
+                "url":"http://google.com",
+                "main":true
+            },
+            {
+                "title":"諾貝爾文學獎得主書展",
+                "description":false,
+                "url":"http://google.com"
+            },
+            {
+                "title":"作家講座",
+                "description":false,
+                "url":"http://google.com"
+            }
+        ]
+    }
+]
+
