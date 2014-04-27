@@ -13,13 +13,6 @@ function NCHULibActMap(actData,whenCompleted){
     };
     var inited=false;
 
-    var backToTopButton={
-        "top":714,
-        "height":157,
-        "left":7,
-        "width":344,
-    };
-
     var update_view=this.update_view=function(){
         viewport_size={
             width:info_container.width(),
@@ -55,20 +48,13 @@ function NCHULibActMap(actData,whenCompleted){
                 .css('width',act.width*zoomRatio);
         }
 
-        function update_backToTop_location(){
-            if(!$('a.act_block#button-0').is('a'))
-                hover_sensor.append($('<a class="act_block backToTop" id="button-0"></a>'));
-
-            $('a.act_block#button-0')
-                .css('top',base_position.top+backToTopButton.top*zoomRatio)
-                .css('height',backToTopButton.height*zoomRatio)
-                .css('left',base_position.left+backToTopButton.left*zoomRatio)
-                .css('width',backToTopButton.width*zoomRatio);
-        }
-
         if(!inited){
             hover_sensor.empty();
             info_content.empty();
+
+            $('div#info_content').click(function(e){
+                toDetail(0);
+            });
 
             actData.forEach(function(act,key){
                 //console.log("key:");
@@ -82,7 +68,6 @@ function NCHULibActMap(actData,whenCompleted){
                 hover_sensor.append(toBeApd);
 
                 update_button_location(act,key);
-                update_backToTop_location();
 
                 var detail_col_offset_md;
                 if(act.detail_col_offset>=2)
@@ -120,7 +105,6 @@ function NCHULibActMap(actData,whenCompleted){
         }
         else{
             actData.forEach(update_button_location);
-            update_backToTop_location();
         }
 
 
@@ -168,6 +152,16 @@ function NCHULibActMap(actData,whenCompleted){
         toDetail(pos);
 
         event.preventDefault();
+        return false;
+    });
+
+    $('div.detail_panel_body a').click(function(e){
+        var target_url=$(this).attr('href');
+        if(target_url.search("http")===0)
+            window.open(target_url,"_blank");
+        else
+            alert("此活動還沒有連結 ><");
+        e.preventDefault();
         return false;
     });
 

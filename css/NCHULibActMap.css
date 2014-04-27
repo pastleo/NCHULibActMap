@@ -78,8 +78,17 @@ div#scroll_buffer{
     background-repeat: no-repeat no-repeat;
 }
 
-div#fixed_title{
+a.act_block.backToTop{
+    border-radius: 0px;
+    text-align: center;
+}
 
+a.act_block.backToTop:hover{
+    border-radius: 0px;
+    background:rgba(178, 211, 233, 0.62);
+}
+
+div#fixed_title{
     position: fixed;
     
 }
