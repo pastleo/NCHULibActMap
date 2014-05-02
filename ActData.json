@@ -13,14 +13,14 @@
             {
                 "title":"諾貝爾文學獎得主",
                 "description":"孟洛著作書展",
-                "url":"http://www.lib.nchu.edu.tw/static_html/lib_newsletter/news_201312/news_201312_8.shtml",
+                "url":"http://goo.gl/uSSjNI",
                 "main":true
             }
         ]
     },
     {
 
-        "href":"http://www.lib.nchu.edu.tw/static_html/lib_newsletter/news_201403/news_201403_10.shtml",
+        "href":"http://goo.gl/GVBnso",
         "top":110,
         "height":90,
         "left":1330,
@@ -32,14 +32,14 @@
             {
                 "title":"中時開卷好書獎展 (2-3月)",
                 "description":false,
-                "url":"http://www.lib.nchu.edu.tw/static_html/lib_newsletter/news_201403/news_201403_10.shtml",
+                "url":"http://goo.gl/GVBnso",
                 "main":true
             }
         ]
     },
     {
 
-        "href":"http://www.lib.nchu.edu.tw/index.php/tw/activitynews/item/620-620",
+        "href":"http://goo.gl/9OvljC",
         "top":298,
         "height":88,
         "left":374,
@@ -51,18 +51,23 @@
             {
                 "title":"資源指引課程 (3-6月)",
                 "description":false,
-                "url":"http://www.lib.nchu.edu.tw/index.php/tw/activitynews/item/620-620",
+                "url":"http://goo.gl/9OvljC",
                 "main":true
+            },
+            {
+                "title":"人社圖書計畫申請說明會(3月)",
+                "description":false,
+                "url":"http://goo.gl/uyrnLo"
             },
             {
                 "title":"國家文官學院好書獎 (3-6月)",
                 "description":false,
-                "url":"http://www.lib.nchu.edu.tw/static_html/lib_newsletter/news_201403/news_201403_9.shtml#1"
+                "url":"http://goo.gl/BdZPi2"
             },
             {
                 "title":"國際期刊投稿技巧講座 (3-5月)",
                 "description":false,
-                "url":"http://www.lib.nchu.edu.tw/index.php/tw/activitynews/item/613-613"
+                "url":"http://goo.gl/El0BJM"
             }
         ]
     },
@@ -80,13 +85,13 @@
             {
                 "title":"423世界閱讀日系列活動",
                 "description":false,
-                "url":"http://www.lib.nchu.edu.tw/index.php/tw/activitynews/item/587-587",
+                "url":"http://goo.gl/T4UUhB",
                 "main":true
             },
             {
                 "title":"借閱通知APP載到手",
                 "description":false,
-                "url":"http://www.lib.nchu.edu.tw/index.php/tw/generalnews/item/629-629"
+                "url":"http://goo.gl/33eGc8"
             }
         ]
     },
@@ -110,12 +115,12 @@
             {
                 "title":"春季i學講堂",
                 "description":false,
-                "url":"http://www.lib.nchu.edu.tw/index.php/tw/generalnews/item/630-%E6%98%A5%E5%AD%A3i%E5%AD%B8%E8%AC%9B%E5%A0%82-%E9%81%8B%E7%94%A8%E5%BF%83%E6%99%BA%E5%9C%96%E6%B3%95%E6%8F%90%E5%8D%87%E5%89%B5%E4%BD%9C%E5%8A%9B%E8%88%87%E5%AD%B8%E7%BF%92%E5%8A%9B"
+                "url":"http://goo.gl/hT8LdL"
             },
             {
                 "title":"留學講座(5-6月)",
                 "description":false,
-                "url":"http://www.lib.nchu.edu.tw/index.php/tw/activitynews/item/622-622"
+                "url":"http://goo.gl/lMpdcG"
             },
             {
                 "title":"人文圖書申請說明會",
