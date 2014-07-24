@@ -50,11 +50,14 @@
             </div>
         </div>
         <script>
-            var acts_url="ActData.json";
-            var NCHULibActMap_obj;
 
-            function ActsReceived(actsData){
-                //console.log(actsData);
+            // ====================================
+            // json source url: (see here to see how to get one: https://coderwall.com/p/duapqq)
+            var acts_json_url="https://spreadsheets.google.com/feeds/list/<input_google_sheet_code_here>/od6/public/values?alt=json";
+            // ====================================
+
+            var NCHULibActMap_obj;
+            function FIRE_NCHULibActMap(actsData,main_bg_size){
                 NCHULibActMap_obj=new NCHULibActMap(actsData,function(){
                     $('div#bg').fadeIn(function(){
                         $('div#map_container').fadeIn(function(){
@@ -65,11 +68,14 @@
                             })
                         });
                     });
-                });
+                },main_bg_size);
             }
 
             $(document).ready(function(){
-                $.getJSON(acts_url,ActsReceived);
+                $.getJSON(acts_json_url,function(gsjson){
+                    var gsjsonResult=gsjson2actsData(gsjson);
+                    FIRE_NCHULibActMap(gsjsonResult.actsData,gsjsonResult.main_bg_size);
+                });
             });
         </script>
     </body>

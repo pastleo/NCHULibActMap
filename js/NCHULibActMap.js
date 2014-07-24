@@ -1,10 +1,11 @@
-function NCHULibActMap(actData,whenCompleted){
+function NCHULibActMap(actData,whenCompleted,main_bg_size){
     var hover_sensor=$('div#hover_sensor');
     var info_container=$('div#info_container');
     var map_container=$('div#map_container');
     var info_content=$('div#info_content');
 
-    var main_bg_size={width:1994,height:884};
+    if((typeof main_bg_size) !== "object")
+        main_bg_size={width:1994,height:884};
     var base_position={left:0,top:0};
     var zoomRatio=1;
     var viewport_size={
@@ -180,4 +181,52 @@ function NCHULibActMap(actData,whenCompleted){
 
     if(typeof whenCompleted === "function")
         whenCompleted();
+}
+
+function gsjson2actsData(JsonData){
+    console.log(JsonData);
+    var actsData=[],main_bg_size={};
+    var d,dt,ismain=false,cursor=false;
+    for(var k in JsonData.feed.entry){
+        d=JsonData.feed.entry[k];
+        //console.log("this d:");
+        //console.log(d);
+        switch(d['gsx$index']['$t']){
+            case 'bg':
+                // console.log("bg");
+                main_bg_size.height=parseInt(d['gsx$height']['$t']);
+                main_bg_size.width=parseInt(d['gsx$width']['$t']);
+                break;
+            case 'main':
+                // console.log("main");
+                ismain=true;
+            case '':
+                // console.log("detail");
+                actsData[cursor].detail_list.push({
+                    title:d['gsx$title']['$t'],
+                    description:d['gsx$description']['$t']?d['gsx$description']['$t']:false,
+                    url:d['gsx$href']['$t'],
+                    main:ismain
+                });
+                ismain=false;
+                break;
+            default:
+                // console.log("this is a month");
+                cursor=parseInt(d['gsx$index']['$t'])-1;
+                actsData[cursor]={
+                    href:d['gsx$href']['$t'],
+                    top:parseInt(d['gsx$top']['$t']),
+                    height:parseInt(d['gsx$height']['$t']),
+                    left:parseInt(d['gsx$left']['$t']),
+                    width:parseInt(d['gsx$width']['$t']),
+                    title:d['gsx$title']['$t'],
+                    detail_col_offset:parseInt(d['gsx$detailcoloffset']['$t']),
+                    detail_list:new Array()
+                };
+                break;
+        }
+    }
+    // console.log("actsData result:");
+    // console.log(actsData);
+    return {actsData:actsData,main_bg_size:main_bg_size};
 }
